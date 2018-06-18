@@ -1,0 +1,13 @@
+{
+  "name": "BrownFieldExample",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "postinstall": "sed -i '' 's#<fishhook/fishhook.h>#\"fishhook.h\"#g' ./node_modules/react-native/Libraries/WebSocket/RCTReconnectingWebSocket.m"
+  },
+  "dependencies": {
+    "react": "16.3.1", 
+    "react-native": "0.56.0-rc.2"
+  }
+}
