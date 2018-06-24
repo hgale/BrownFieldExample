@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let mainViewController = ReactNativeViewController()
+        let mainViewController = HomeScreenViewController()//ReactNativeViewController()
         window!.rootViewController = mainViewController
         window!.makeKeyAndVisible()
         return true

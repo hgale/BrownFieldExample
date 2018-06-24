@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B5F114620DF1F4A00423CBD /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F114520DF1F4A00423CBD /* HomeScreenViewController.swift */; };
+		8B5F114B20DF278800423CBD /* HTReactNativeHostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */; };
 		8BE2499220D744A80014CBCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2499120D744A80014CBCF /* AppDelegate.swift */; };
 		8BE2499420D744A80014CBCF /* ReactNativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2499320D744A80014CBCF /* ReactNativeViewController.swift */; };
 		8BE2499920D744AA0014CBCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BE2499820D744AA0014CBCF /* Assets.xcassets */; };
@@ -15,6 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B5F114520DF1F4A00423CBD /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		8B5F114920DF278800423CBD /* BrownFieldExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrownFieldExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTReactNativeHostController.m; sourceTree = "<group>"; };
+		8B5F114C20DF27A700423CBD /* HTReactNativeHostController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTReactNativeHostController.h; sourceTree = "<group>"; };
 		8B80CC94256EE8CCD193EF1B /* Pods-BrownFieldExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrownFieldExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrownFieldExample/Pods-BrownFieldExample.release.xcconfig"; sourceTree = "<group>"; };
 		8BE2498E20D744A80014CBCF /* BrownFieldExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrownFieldExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE2499120D744A80014CBCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +61,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8B5F114820DF266200423CBD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8BE2498520D744A80014CBCF = {
 			isa = PBXGroup;
 			children = (
@@ -76,11 +89,16 @@
 		8BE2499020D744A80014CBCF /* BrownFieldExample */ = {
 			isa = PBXGroup;
 			children = (
+				8B5F114820DF266200423CBD /* Supporting Files */,
 				8BE2499120D744A80014CBCF /* AppDelegate.swift */,
 				8BE2499320D744A80014CBCF /* ReactNativeViewController.swift */,
 				8BE2499820D744AA0014CBCF /* Assets.xcassets */,
 				8BE2499A20D744AA0014CBCF /* LaunchScreen.storyboard */,
 				8BE2499D20D744AA0014CBCF /* Info.plist */,
+				8B5F114520DF1F4A00423CBD /* HomeScreenViewController.swift */,
+				8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */,
+				8B5F114920DF278800423CBD /* BrownFieldExample-Bridging-Header.h */,
+				8B5F114C20DF27A700423CBD /* HTReactNativeHostController.h */,
 			);
 			path = BrownFieldExample;
 			sourceTree = "<group>";
@@ -119,6 +137,7 @@
 				TargetAttributes = {
 					8BE2498D20D744A80014CBCF = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 				};
 			};
@@ -162,6 +181,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-BrownFieldExample/Pods-BrownFieldExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
 				"${BUILT_PRODUCTS_DIR}/Folly/folly.framework",
+				"${BUILT_PRODUCTS_DIR}/MSREventBridge/MSREventBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/React/React.framework",
 				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
 				"${BUILT_PRODUCTS_DIR}/yoga/yoga.framework",
@@ -170,6 +190,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSREventBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
@@ -204,8 +225,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B5F114B20DF278800423CBD /* HTReactNativeHostController.m in Sources */,
 				8BE2499420D744A80014CBCF /* ReactNativeViewController.swift in Sources */,
 				8BE2499220D744A80014CBCF /* AppDelegate.swift in Sources */,
+				8B5F114620DF1F4A00423CBD /* HomeScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +365,7 @@
 			baseConfigurationReference = C3C4F0B58B0CFB7D5892665F /* Pods-BrownFieldExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CY96XU47F;
 				INFOPLIST_FILE = BrownFieldExample/Info.plist;
@@ -351,6 +375,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = launchdrawer.BrownFieldExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BrownFieldExample/BrownFieldExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -361,6 +387,7 @@
 			baseConfigurationReference = 8B80CC94256EE8CCD193EF1B /* Pods-BrownFieldExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CY96XU47F;
 				INFOPLIST_FILE = BrownFieldExample/Info.plist;
@@ -370,6 +397,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = launchdrawer.BrownFieldExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BrownFieldExample/BrownFieldExample-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

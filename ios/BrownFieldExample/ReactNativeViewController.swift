@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ReactNativeViewController.swift
 //  BrownFieldExample
 //
 //  Created by Harry Tormey on 6/17/18.

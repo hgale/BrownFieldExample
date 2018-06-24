@@ -1,11 +1,22 @@
 import React from 'react';
-import {AppRegistry, StyleSheet, Text, View} from 'react-native';
+import EventBridge from 'react-native-event-bridge';
+
+
+import { AppRegistry, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 class BrownFieldExample extends React.Component {
+
+  dismissScreen = () => {
+    EventBridge.emitEvent(this, 'DismissScreen');    
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.highScoresTitle}>Hello React Native!</Text>
+        <TouchableOpacity onPress={this.dismissScreen}>
+          <Text style={styles.text}>Tap to dismiss </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -18,6 +29,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },  
   highScoresTitle: {
     fontSize: 20,
     textAlign: 'center',
