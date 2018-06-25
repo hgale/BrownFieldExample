@@ -1,15 +1,45 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import EventBridge from 'react-native-event-bridge';
+
+import EventBridge, {
+  // enhanceForEventsSupport,
+  // enhanceForEventsSupportDecorator,
+  enhanceForEventsSupportEnhanced,
+} from 'react-native-event-bridge';
 
 
 import { AppRegistry, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 class BrownFieldExample extends React.Component {
 
+  static contextTypes = {
+    rootTag: PropTypes.number,
+  };
+
   dismissScreen = () => {
     EventBridge.emitEvent(this, 'DismissScreen');    
   }
 
+  // Add and remove as event listener
+  componentDidMount() {
+    console.log("componentDidMount hit");
+    this._eventSubscription = EventBridge.addEventListener(
+      this,
+      (name, info) => {
+        console.log(
+          `Received event from native event: '${name}' with info: ${JSON.stringify(
+            info
+          )}`
+        );
+      }
+    );
+
+  }
+  componentWillUnmount() {
+    if (this._eventSubscription) {
+      this._eventSubscription.remove();
+    }
+  }
   render() {
     return (
       <View style={styles.container}>

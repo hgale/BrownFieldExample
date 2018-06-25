@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8B5F114620DF1F4A00423CBD /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F114520DF1F4A00423CBD /* HomeScreenViewController.swift */; };
 		8B5F114B20DF278800423CBD /* HTReactNativeHostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */; };
+		8BB3C99120DF4D190079561A /* HTReactNativeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3C99020DF4D190079561A /* HTReactNativeEvent.m */; };
 		8BE2499220D744A80014CBCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2499120D744A80014CBCF /* AppDelegate.swift */; };
 		8BE2499420D744A80014CBCF /* ReactNativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2499320D744A80014CBCF /* ReactNativeViewController.swift */; };
 		8BE2499920D744AA0014CBCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BE2499820D744AA0014CBCF /* Assets.xcassets */; };
@@ -22,6 +23,8 @@
 		8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTReactNativeHostController.m; sourceTree = "<group>"; };
 		8B5F114C20DF27A700423CBD /* HTReactNativeHostController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTReactNativeHostController.h; sourceTree = "<group>"; };
 		8B80CC94256EE8CCD193EF1B /* Pods-BrownFieldExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrownFieldExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrownFieldExample/Pods-BrownFieldExample.release.xcconfig"; sourceTree = "<group>"; };
+		8BB3C99020DF4D190079561A /* HTReactNativeEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTReactNativeEvent.m; sourceTree = "<group>"; };
+		8BB3C99220DF4D2C0079561A /* HTReactNativeEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTReactNativeEvent.h; sourceTree = "<group>"; };
 		8BE2498E20D744A80014CBCF /* BrownFieldExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrownFieldExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE2499120D744A80014CBCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BE2499320D744A80014CBCF /* ReactNativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactNativeViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 				8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */,
 				8B5F114920DF278800423CBD /* BrownFieldExample-Bridging-Header.h */,
 				8B5F114C20DF27A700423CBD /* HTReactNativeHostController.h */,
+				8BB3C99020DF4D190079561A /* HTReactNativeEvent.m */,
+				8BB3C99220DF4D2C0079561A /* HTReactNativeEvent.h */,
 			);
 			path = BrownFieldExample;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				8B5F114B20DF278800423CBD /* HTReactNativeHostController.m in Sources */,
 				8BE2499420D744A80014CBCF /* ReactNativeViewController.swift in Sources */,
 				8BE2499220D744A80014CBCF /* AppDelegate.swift in Sources */,
+				8BB3C99120DF4D190079561A /* HTReactNativeEvent.m in Sources */,
 				8B5F114620DF1F4A00423CBD /* HomeScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
