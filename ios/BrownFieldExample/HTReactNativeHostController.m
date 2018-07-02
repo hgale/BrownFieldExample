@@ -15,10 +15,13 @@
 #import "MSREventBridge.h"
 #import "HTReactNativeEvent.h"
 
-static NSString * const DismissScreenEvent = @"DismissScreen";
-static NSString * const EmitEvent = @"EmitEvent";
+static NSString * const kBundleURL =  @"http://localhost:8081/index.bundle?platform=ios";
+static NSString * const kDismissScreenEvent = @"DismissScreen";
+static NSString * const kEmitEvent = @"EmitEvent";
 
-@interface MSREventBridgeBridgeManagerTwo : NSObject<RCTBridgeDelegate>
+static BOOL kDevloperMode = false;
+
+@interface MSREventBridgeBridgeManager : NSObject
 
 + (instancetype)sharedInstance;
 
@@ -28,7 +31,8 @@ static NSString * const EmitEvent = @"EmitEvent";
 
 @end
 
-@implementation MSREventBridgeBridgeManagerTwo
+// TODO move this into common file
+@implementation MSREventBridgeBridgeManager
 
 #pragma mark Lifecycle
 
@@ -49,7 +53,8 @@ static NSString * const EmitEvent = @"EmitEvent";
     static RCTBridge *bridge = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        bridge = [[RCTBridge alloc] initWithBundleURL:[HTReactNativeHostController getJSCodeLocation] moduleProvider:nil launchOptions:nil];
+      NSURL *localServer =  kDevloperMode ? [NSURL URLWithString:kBundleURL] : [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+        bridge = [[RCTBridge alloc] initWithBundleURL:localServer moduleProvider:nil launchOptions:nil];
     });
     return bridge;
 }
@@ -57,13 +62,6 @@ static NSString * const EmitEvent = @"EmitEvent";
 - (RCTRootView *)viewForModuleName:(NSString *)moduleName initialProperties:(NSDictionary *)initialProps
 {
     return [[RCTRootView alloc] initWithBridge:self.bridge moduleName:moduleName initialProperties:initialProps];
-}
-
-#pragma mark RCTBridgeDelegate
-
-- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
-{
-    return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 }
 
 @end
@@ -101,18 +99,19 @@ static NSString * const EmitEvent = @"EmitEvent";
 
 - (void)loadView
 {
-    self.view = [[MSREventBridgeBridgeManagerTwo sharedInstance] viewForModuleName:@"BrownFieldExample" initialProperties:_properties];
+    self.view = [[MSREventBridgeBridgeManager sharedInstance] viewForModuleName:@"BrownFieldExample" initialProperties:_properties];
     
-    HTReactNativeEvent *dismissEvent = [[HTReactNativeEvent alloc] initWithName:DismissScreenEvent handler:^(NSDictionary *info){
+    // TODO: Move these out of here
+    HTReactNativeEvent *dismissEvent = [[HTReactNativeEvent alloc] initWithName:kDismissScreenEvent handler:^(NSDictionary *info){
         NSLog(@"Dismiss event");
         // TODO make this weak to avoid syclic.
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
     [self addEvent:dismissEvent];
     
-    HTReactNativeEvent *emitEvent = [[HTReactNativeEvent alloc] initWithName:EmitEvent handler:^(NSDictionary *info){
+    HTReactNativeEvent *emitEvent = [[HTReactNativeEvent alloc] initWithName:kEmitEvent handler:^(NSDictionary *info){
         NSLog(@"Emit event");
-        [HTReactNativeHostController sendReactNativeEventWithName:@"Testing" info:@{@"Foo" : @"Bar"} view:self.view];
+        [self sendReactNativeEventWithName:@"Testing" info:@{@"Foo" : @"Bar"}];
     }];
     [self addEvent:emitEvent];
 }
@@ -135,32 +134,15 @@ static NSString * const EmitEvent = @"EmitEvent";
     return [[_events filteredArrayUsingPredicate:predicate] firstObject];
 }
 
-+ (BOOL)inDeveloperMode {
-    return false;
-}
-
-+ (NSURL *) getJSCodeLocation {
-    NSURL *localServer =  [NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios"];
-    // TODO: Add in codepush etc, and pivot on developerMode
-    return localServer;
-}
-
-+ (void)sendReactNativeEventWithName:(NSString *)name info:(NSDictionary *)info view:(UIView *)view {
- id<MSREventBridgeEventEmitter> emitter = MSREventBridgeBridgeManagerTwo.sharedInstance.bridge.viewControllerEventEmitter;
+- (void)sendReactNativeEventWithName:(NSString *)name info:(NSDictionary *)info {
+ id<MSREventBridgeEventEmitter> emitter = MSREventBridgeBridgeManager.sharedInstance.bridge.viewControllerEventEmitter;
     [emitter emitEventWithName:name info:info];
-    [emitter emitEventForView:view name:name info:info];
+    [emitter emitEventForView:self.view name:name info:info];
 }
 
-+ (void)missingEventWithName:(NSString *)name
+- (void)missingEventWithName:(NSString *)name
 {
-}
-
-+ (RCTBridge *)bridge {
-    static RCTBridge *bridge = nil;
-    if (!bridge) {
-        bridge = [[RCTBridge alloc] initWithBundleURL:[HTReactNativeHostController getJSCodeLocation] moduleProvider:nil launchOptions:nil];
-    }
-    return bridge;
+    NSLog(@"missingEventWithName %@", name);
 }
 
 + (HTReactNativeHostController *)controller {

@@ -19,11 +19,8 @@
 - (void)addEvent:(HTReactNativeEvent *)event;
 - (void)removeEvent:(HTReactNativeEvent *)event;
 
-+ (NSURL *) getJSCodeLocation;
+- (void)sendReactNativeEventWithName:(NSString *)name info:(NSDictionary *)info;
 
-//+ (void)sendReactNativeEventWithName:(NSString *)name info:(NSDictionary *)info;
-+ (void)sendReactNativeEventWithName:(NSString *)name info:(NSDictionary *)info view:(UIView *)view;
-
-+ (void)missingEventWithName:(NSString *)name;
+- (void)missingEventWithName:(NSString *)name;
 
 @end

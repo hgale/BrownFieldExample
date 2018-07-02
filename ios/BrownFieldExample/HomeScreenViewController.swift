@@ -18,16 +18,7 @@ class HomeScreenViewController: UIViewController {
         buttonOne.backgroundColor = .green
         buttonOne.setTitle("React Native VC", for: .normal)
         buttonOne.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
         self.view.addSubview(buttonOne)
-        
-        
-        let buttonTwo = UIButton(frame: CGRect(x: 100, y: 200, width: 150, height: 50))
-        buttonTwo.backgroundColor = .red
-        buttonTwo.setTitle("React Native VC2", for: .normal)
-        buttonTwo.addTarget(self, action: #selector(buttonActionTwo), for: .touchUpInside)
-        self.view.addSubview(buttonTwo)
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     @objc func buttonAction(sender: UIButton!) {
@@ -38,10 +29,5 @@ class HomeScreenViewController: UIViewController {
         self.present(reactNativeViewController!, animated: false, completion: nil)
     }
     
-    @objc func buttonActionTwo(sender: UIButton!) {
-        print("Button2  tapped")
-        let reactNativeViewController = RNViewControllerTwo()
-        self.present(reactNativeViewController, animated: false, completion: nil)
-    }
 }
 

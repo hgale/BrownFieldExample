@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B469DA620E9A4C600E0E255 /* RNViewControllerTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B469DA520E9A4C600E0E255 /* RNViewControllerTwo.m */; };
+		8B469DA820EAA24600E0E255 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B469DA720EAA24500E0E255 /* main.jsbundle */; };
 		8B5F114620DF1F4A00423CBD /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F114520DF1F4A00423CBD /* HomeScreenViewController.swift */; };
 		8B5F114B20DF278800423CBD /* HTReactNativeHostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */; };
 		8BB3C99120DF4D190079561A /* HTReactNativeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3C99020DF4D190079561A /* HTReactNativeEvent.m */; };
@@ -19,8 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8B469DA420E9A46000E0E255 /* RNViewControllerTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNViewControllerTwo.h; sourceTree = "<group>"; };
-		8B469DA520E9A4C600E0E255 /* RNViewControllerTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNViewControllerTwo.m; sourceTree = "<group>"; };
+		8B469DA720EAA24500E0E255 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		8B5F114520DF1F4A00423CBD /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		8B5F114920DF278800423CBD /* BrownFieldExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrownFieldExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B5F114A20DF278800423CBD /* HTReactNativeHostController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTReactNativeHostController.m; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		8BE2499020D744A80014CBCF /* BrownFieldExample */ = {
 			isa = PBXGroup;
 			children = (
+				8B469DA720EAA24500E0E255 /* main.jsbundle */,
 				8B5F114820DF266200423CBD /* Supporting Files */,
 				8BE2499120D744A80014CBCF /* AppDelegate.swift */,
 				8BE2499320D744A80014CBCF /* ReactNativeViewController.swift */,
@@ -107,8 +107,6 @@
 				8B5F114C20DF27A700423CBD /* HTReactNativeHostController.h */,
 				8BB3C99020DF4D190079561A /* HTReactNativeEvent.m */,
 				8BB3C99220DF4D2C0079561A /* HTReactNativeEvent.h */,
-				8B469DA420E9A46000E0E255 /* RNViewControllerTwo.h */,
-				8B469DA520E9A4C600E0E255 /* RNViewControllerTwo.m */,
 			);
 			path = BrownFieldExample;
 			sourceTree = "<group>";
@@ -174,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B469DA820EAA24600E0E255 /* main.jsbundle in Resources */,
 				8BE2499C20D744AA0014CBCF /* LaunchScreen.storyboard in Resources */,
 				8BE2499920D744AA0014CBCF /* Assets.xcassets in Resources */,
 			);
@@ -236,7 +235,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B5F114B20DF278800423CBD /* HTReactNativeHostController.m in Sources */,
-				8B469DA620E9A4C600E0E255 /* RNViewControllerTwo.m in Sources */,
 				8BE2499420D744A80014CBCF /* ReactNativeViewController.swift in Sources */,
 				8BE2499220D744A80014CBCF /* AppDelegate.swift in Sources */,
 				8BB3C99120DF4D190079561A /* HTReactNativeEvent.m in Sources */,
