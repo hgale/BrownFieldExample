@@ -41,11 +41,6 @@
  */
 - (RCTRootView *)viewForModuleName:(NSString *)moduleName initialProperties:(NSDictionary *)initialProps;
 
-/**
- * Returns the root view for a given react tag. The react tag can be from a view that is within the view hierarchy
- */
-- (void)rootViewForReactTag:(NSNumber *)reactTag withCompletion:(void (^)(UIView *view))completion;
-
 @end
 
 
@@ -72,14 +67,8 @@
     dispatch_once(&onceToken, ^{
         NSURL *localServer =  [NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios"];
         bridge = [[RCTBridge alloc] initWithBundleURL:localServer moduleProvider:nil launchOptions:nil];
-        bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
     });
     return bridge;
-}
-
-- (void)rootViewForReactTag:(NSNumber *)reactTag withCompletion:(void (^)(UIView *view))completion
-{
-    [self.bridge.uiManager rootViewForReactTag:reactTag withCompletion:completion];
 }
 
 - (RCTRootView *)viewForModuleName:(NSString *)moduleName initialProperties:(NSDictionary *)initialProps
