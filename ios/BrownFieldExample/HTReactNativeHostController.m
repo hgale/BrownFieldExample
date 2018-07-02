@@ -75,10 +75,8 @@ static NSString * const DismissScreenEvent = @"DismissScreen";
 }
 
 - (void)addEvent:(HTReactNativeEvent *)event {
-    NSLog(@"addEvent called with %@", event);
     if (!event) return;
     [_events addObject:event];
-    NSLog(@"Added event %@", _events);
 }
 
 - (void)removeEvent:(HTReactNativeEvent *)event {

@@ -20,6 +20,10 @@ class BrownFieldExample extends React.Component {
     EventBridge.emitEvent(this, 'DismissScreen');    
   }
 
+  dismissScreen = () => {
+    EventBridge.emitEvent(this, 'TestFire');    
+  }  
+
   // Add and remove as event listener
   componentDidMount() {
     console.log("componentDidMount hit");
@@ -47,6 +51,9 @@ class BrownFieldExample extends React.Component {
         <TouchableOpacity onPress={this.dismissScreen}>
           <Text style={styles.text}>Tap to dismiss </Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={this.dismissScreen}>
+          <Text style={styles.text}>Tap to trigger send </Text>
+        </TouchableOpacity>        
       </View>
     );
   }
