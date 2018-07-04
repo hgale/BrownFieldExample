@@ -14,6 +14,8 @@
 
 @interface HTReactNativeHostController : UIViewController
 
++ (void)applicationDidLaunch;
+
 - (id)initWithScreen:(NSString *)screen properties:(NSDictionary *)properties;
 
 - (void)addEvent:(HTReactNativeEvent *)event;

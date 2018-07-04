@@ -21,6 +21,8 @@ static NSString * const kEmitEvent = @"EmitEvent";
 
 static BOOL kDevloperMode = true;//false;
 
+static HTReactNativeHostController *queryController;
+
 @interface MSREventBridgeBridgeManager : NSObject
 
 + (instancetype)sharedInstance;
@@ -93,12 +95,12 @@ static BOOL kDevloperMode = true;//false;
     _screen = screen;
     _properties = properties;
     _events = [NSMutableArray new];
-
+    [self setupView];
     return self;
 }
 
-- (void)loadView
-{
+- (void)setupView {
+    [self.view layoutIfNeeded];
     self.view = [[MSREventBridgeBridgeManager sharedInstance] viewForModuleName:@"BrownFieldExample" initialProperties:_properties];
     
     // TODO: Move these out of here
@@ -114,6 +116,11 @@ static BOOL kDevloperMode = true;//false;
         [self sendReactNativeEventWithName:@"Testing" info:@{@"Foo" : @"Bar"}];
     }];
     [self addEvent:emitEvent];
+}
+
+
++ (void)applicationDidLaunch {
+    queryController = [[HTReactNativeHostController alloc] initWithScreen:@"Query" properties:@{ @"screen" : @"Query", @"getAvailableScreens" : @true}];
 }
 
 - (void)addEvent:(HTReactNativeEvent *)event {

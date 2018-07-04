@@ -19,6 +19,16 @@ class HomeScreenViewController: UIViewController {
         buttonOne.setTitle("React Native VC", for: .normal)
         buttonOne.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         self.view.addSubview(buttonOne)
+        
+        let buttonTwo = UIButton(frame: CGRect(x: 100, y: 180, width: 150, height: 50))
+        buttonTwo.backgroundColor = .red
+        buttonTwo.setTitle("Pull screens", for: .normal)
+        buttonTwo.addTarget(self, action: #selector(buttonActionTwo), for: .touchUpInside)
+        self.view.addSubview(buttonTwo)
+    }
+
+    @objc func buttonActionTwo(sender: UIButton!) {
+        HTReactNativeHostController.applicationDidLaunch();
     }
     
     @objc func buttonAction(sender: UIButton!) {
