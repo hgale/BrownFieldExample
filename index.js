@@ -1,32 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import EventBridge, {
-  // enhanceForEventsSupport,
-  // enhanceForEventsSupportDecorator,
-  enhanceForEventsSupportEnhanced,
-} from 'react-native-event-bridge';
+import EventBridge from 'react-native-event-bridge';
 
+import { getScreen, AppEvents, ScreenList } from './src/const';
 
-import { AppRegistry, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { AppRegistry } from 'react-native';
 
-class BrownFieldExample extends React.Component {
+class EntryPoint extends React.Component {
 
   static contextTypes = {
     rootTag: PropTypes.number,
   };
 
-  dismissScreen = () => {
-    EventBridge.emitEvent(this, 'DismissScreen');    
-  }
-
-  emitEvent = () => {
-    EventBridge.emitEvent(this, 'EmitEvent');
-  }  
-
-  // Add and remove as event listener
   componentDidMount() {
-    console.log("componentDidMount hit");
+    // Listen for events sent from the native side of the React Native Bridge
     this._eventSubscription = EventBridge.addEventListener(
       this,
       (name, info) => {
@@ -37,6 +25,11 @@ class BrownFieldExample extends React.Component {
         );
       }
     );
+    const { screen, getAvailableScreens } = this.props;
+
+    if (getAvailableScreens) {
+      this.sendListOfScreens();
+    }
 
   }
   componentWillUnmount() {
@@ -44,44 +37,16 @@ class BrownFieldExample extends React.Component {
       this._eventSubscription.remove();
     }
   }
+
+  sendListOfScreens = () => {
+    EventBridge.emitEvent(this, AppEvents.ListScreens, {info:ScreenList()});  
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.highScoresTitle}>Hello React Native!</Text>
-        <TouchableOpacity onPress={this.dismissScreen}>
-          <Text style={styles.text}>Tap to dismiss </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.emitEvent}>
-          <Text style={styles.text}>Tap to trigger send </Text>
-        </TouchableOpacity>        
-      </View>
-    );
+    const screen = getScreen(this.props)
+    return (screen);
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-  },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },  
-  highScoresTitle: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  scores: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
 // Module name
-AppRegistry.registerComponent('BrownFieldExample', () => BrownFieldExample);
+AppRegistry.registerComponent('BrownFieldExample', () => EntryPoint);

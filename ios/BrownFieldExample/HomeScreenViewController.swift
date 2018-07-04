@@ -23,9 +23,10 @@ class HomeScreenViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
-        let properties : Dictionary = Dictionary<AnyHashable,Any>()
+        var properties : Dictionary = Dictionary<AnyHashable,Any>()
+        properties["screen"] = "UpsellScreenOne"
         let reactNativeViewController =
-            HTReactNativeHostController(screen: "ScreenOne", properties: properties)
+            HTReactNativeHostController(screen: "UpsellScreenOne", properties: properties)
         self.present(reactNativeViewController!, animated: false, completion: nil)
     }
     

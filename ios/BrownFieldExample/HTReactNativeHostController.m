@@ -19,7 +19,7 @@ static NSString * const kBundleURL =  @"http://localhost:8081/index.bundle?platf
 static NSString * const kDismissScreenEvent = @"DismissScreen";
 static NSString * const kEmitEvent = @"EmitEvent";
 
-static BOOL kDevloperMode = false;
+static BOOL kDevloperMode = true;//false;
 
 @interface MSREventBridgeBridgeManager : NSObject
 
