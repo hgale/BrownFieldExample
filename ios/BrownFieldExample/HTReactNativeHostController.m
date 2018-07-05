@@ -90,7 +90,7 @@ static HTReactNativeHostController *queryController;
 
 // TODO add asset to stup 
 - (id)initWithScreen:(NSString *)screen properties:(NSDictionary *)properties {
-    self = [super init];
+    self = [super initWithNibName:nil bundle:nil];
     if (!self) return nil;
     _screen = screen;
     _properties = properties;
@@ -102,24 +102,11 @@ static HTReactNativeHostController *queryController;
 - (void)setupView {
     [self.view layoutIfNeeded];
     self.view = [[MSREventBridgeBridgeManager sharedInstance] viewForModuleName:@"BrownFieldExample" initialProperties:_properties];
-    
-    // TODO: Move these out of here
-    HTReactNativeEvent *dismissEvent = [[HTReactNativeEvent alloc] initWithName:kDismissScreenEvent handler:^(NSDictionary *info){
-        NSLog(@"Dismiss event");
-        // TODO make this weak to avoid syclic.
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
-    [self addEvent:dismissEvent];
-    
-    HTReactNativeEvent *emitEvent = [[HTReactNativeEvent alloc] initWithName:kEmitEvent handler:^(NSDictionary *info){
-        NSLog(@"Emit event");
-        [self sendReactNativeEventWithName:@"Testing" info:@{@"Foo" : @"Bar"}];
-    }];
-    [self addEvent:emitEvent];
 }
 
 
 + (void)applicationDidLaunch {
+    // TODO: The bridge manager code will need to be moved inside later on.
     queryController = [[HTReactNativeHostController alloc] initWithScreen:@"Query" properties:@{ @"screen" : @"Query", @"getAvailableScreens" : @true}];
 }
 

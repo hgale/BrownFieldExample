@@ -9,33 +9,23 @@
 import React
 import UIKit
 
-class ReactNativeViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let jsCodeLocation = URL(string: "http://localhost:8081/index.bundle?platform=ios")
-        let mockData:NSDictionary = ["scores":
-            [
-                ["name":"Alex", "value":"42"],
-                ["name":"Joel", "value":"10"]
-            ]
-        ]
-        let rootView = RCTRootView(
-            bundleURL: jsCodeLocation,
-            moduleName: "BrownFieldExample",
-            initialProperties: mockData as [NSObject : AnyObject],
-            launchOptions: nil
-        )
-        self.view = rootView
-//        self.view.backgroundColor = UIColor.green
-        // Do any additional setup after loading the view, typically from a nib.
+class ReactNativeViewController: HTReactNativeHostController {
+    
+    override init!(screen: String!, properties: [AnyHashable : Any]!) {
+        super.init(screen: screen, properties: properties);
+        self.setupEvents()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func setupEvents() {
+        self.add(HTReactNativeEvent(name: "DismissScreen", handler: { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
+        }))
+        self.add(HTReactNativeEvent(name: "EmitEvent", handler: { info in
+            guard let foo = info?["Foo"] as? String else { return }
+            print("Value passed back from ReactNative is ", foo)
+        }));
     }
-
-
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) not implemented") }
 }
 

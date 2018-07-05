@@ -3,4 +3,4 @@
 //
 
 #import "HTReactNativeHostController.h"
-#import "RNViewControllerTwo.h"
+#import "HTReactNativeEvent.h"
