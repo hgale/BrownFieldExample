@@ -21,8 +21,6 @@ static NSString * const kEmitEvent = @"EmitEvent";
 
 static BOOL kDevloperMode = true;//false;
 
-static HTReactNativeHostController *queryController;
-
 @interface MSREventBridgeBridgeManager : NSObject
 
 + (instancetype)sharedInstance;
@@ -104,10 +102,8 @@ static HTReactNativeHostController *queryController;
     self.view = [[MSREventBridgeBridgeManager sharedInstance] viewForModuleName:@"BrownFieldExample" initialProperties:_properties];
 }
 
-
 + (void)applicationDidLaunch {
-    // TODO: The bridge manager code will need to be moved inside later on.
-    queryController = [[HTReactNativeHostController alloc] initWithScreen:@"Query" properties:@{ @"screen" : @"Query", @"getAvailableScreens" : @true}];
+    // Override this function to warm up the bridge and query react native for its contents
 }
 
 - (void)addEvent:(HTReactNativeEvent *)event {

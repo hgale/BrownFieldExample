@@ -28,9 +28,8 @@ class HomeScreenViewController: UIViewController {
     }
 
     @objc func buttonActionTwo(sender: UIButton!) {
-        // Change this to be ReactNativeViewController, which perhaps can
         // maintain a static array of screens, then toggle between screens to pick.
-        HTReactNativeHostController.applicationDidLaunch();
+        ReactNativeViewController.applicationDidLaunch();
     }
     
     @objc func buttonAction(sender: UIButton!) {
