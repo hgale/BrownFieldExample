@@ -27,7 +27,7 @@ class ReactNativeViewController: HTReactNativeHostController {
             guard let foo = info?["Foo"] as? String else { return }
             print("Value passed back from ReactNative is ", foo)
         }));
-        
+
         self.add(HTReactNativeEvent(name: "ListScreens", handler: { info in
             guard let screens = info?["screens"] as? [[String: Any]] else { return }
             print("ListScreens passed back from ReactNative is ", screens)

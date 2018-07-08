@@ -16,8 +16,7 @@
 #import "HTReactNativeEvent.h"
 
 static NSString * const kBundleURL =  @"http://localhost:8081/index.bundle?platform=ios";
-static NSString * const kDismissScreenEvent = @"DismissScreen";
-static NSString * const kEmitEvent = @"EmitEvent";
+static NSString * const kPredicateFormat = @"name == %@";
 
 static BOOL kDevloperMode = true;//false;
 
@@ -107,20 +106,19 @@ static BOOL kDevloperMode = true;//false;
 }
 
 - (void)addEvent:(HTReactNativeEvent *)event {
-    if (!event) return;
-    // TODO: Check if event is already present and bail if it is.
+    if (!event || [self findEventFrom:event.name]) return;
     [_events addObject:event];
 }
 
 - (void)removeEvent:(HTReactNativeEvent *)event {
     if (!event) return;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", event.name];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:kPredicateFormat, event.name];
     _events = [[_events filteredArrayUsingPredicate:predicate] mutableCopy];
 }
 
 - (HTReactNativeEvent *)findEventFrom:(NSString *)name {
     if (!name) return nil;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:kPredicateFormat, name];
     return [[_events filteredArrayUsingPredicate:predicate] firstObject];
 }
 
@@ -152,11 +150,10 @@ static BOOL kDevloperMode = true;//false;
     // Handle events dispatched from React Native
     NSLog(@"Received event: '%@', with info: %@", eventName, info);
     HTReactNativeEvent *event = [self findEventFrom:eventName];
-    NSLog(@"event is %@ ", event);
-    NSLog(@"events is %@", _events);
     if (event) {
-        NSLog(@"Calling handler");
         event.handler(info);
+    } else {
+        [self missingEventWithName:eventName];
     }
 }
 
