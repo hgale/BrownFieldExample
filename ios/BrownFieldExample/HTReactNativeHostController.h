@@ -16,7 +16,7 @@
 
 + (void)applicationDidLaunch;
 
-- (id)initWithScreen:(NSString *)screen properties:(NSDictionary *)properties;
+- (id)initWithModule:(NSString *)moduleName properties:(NSDictionary *)properties;
 
 - (void)addEvent:(HTReactNativeEvent *)event;
 - (void)removeEvent:(HTReactNativeEvent *)event;

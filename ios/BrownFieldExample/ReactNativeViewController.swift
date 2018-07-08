@@ -13,8 +13,8 @@ class ReactNativeViewController: HTReactNativeHostController {
 
     public static var queryController: HTReactNativeHostController?
     
-    override init!(screen: String!, properties: [AnyHashable : Any]!) {
-        super.init(screen: screen, properties: properties);
+    override init!(module: String!, properties: [AnyHashable : Any]!) {
+        super.init(module: module, properties: properties)
         self.setupEvents()
     }
 
@@ -40,7 +40,7 @@ class ReactNativeViewController: HTReactNativeHostController {
         var properties : Dictionary = Dictionary<AnyHashable,Any>()
         properties["screen"] = "Query"
         properties["getAvailableScreens"] = true
-        ReactNativeViewController.queryController = ReactNativeViewController(screen: "Query", properties: properties)
+        ReactNativeViewController.queryController = ReactNativeViewController(module: "BrownFieldExample", properties: properties)
         
     }
     

@@ -37,7 +37,7 @@ class HomeScreenViewController: UIViewController {
         var properties : Dictionary = Dictionary<AnyHashable,Any>()
         properties["screen"] = "UpsellScreenOne"
         let viewController =
-            ReactNativeViewController(screen: "UpsellScreenOne", properties: properties)
+            ReactNativeViewController(module: "BrownFieldExample", properties: properties)
         self.present(viewController!, animated: false, completion: nil)
     }
     

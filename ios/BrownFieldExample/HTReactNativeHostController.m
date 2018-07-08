@@ -71,7 +71,7 @@ static BOOL kDevloperMode = true;//false;
 
 @implementation HTReactNativeHostController {
     NSMutableArray *_events;
-    NSString *_screen;
+    NSString *_moduleName;
     NSDictionary *_properties;
 }
 
@@ -86,10 +86,10 @@ static BOOL kDevloperMode = true;//false;
 }
 
 // TODO add asset to stup 
-- (id)initWithScreen:(NSString *)screen properties:(NSDictionary *)properties {
+- (id)initWithModule:(NSString *)moduleName properties:(NSDictionary *)properties {
     self = [super initWithNibName:nil bundle:nil];
     if (!self) return nil;
-    _screen = screen;
+    _moduleName = moduleName;
     _properties = properties;
     _events = [NSMutableArray new];
     [self setupView];
@@ -98,7 +98,7 @@ static BOOL kDevloperMode = true;//false;
 
 - (void)setupView {
     [self.view layoutIfNeeded];
-    self.view = [[MSREventBridgeBridgeManager sharedInstance] viewForModuleName:@"BrownFieldExample" initialProperties:_properties];
+    self.view = [[MSREventBridgeBridgeManager sharedInstance] viewForModuleName:_moduleName initialProperties:_properties];
 }
 
 + (void)applicationDidLaunch {
@@ -131,15 +131,6 @@ static BOOL kDevloperMode = true;//false;
 - (void)missingEventWithName:(NSString *)name
 {
     NSLog(@"missingEventWithName %@", name);
-}
-
-+ (HTReactNativeHostController *)controller {
-    static HTReactNativeHostController *controller = nil;
-    if (!controller) {
-        // TODO update this
-        controller = [[HTReactNativeHostController alloc] initWithScreen:@"query" properties:nil];
-    }
-    return controller;
 }
 
 #pragma make - MSREventBridgeEventReceiver
