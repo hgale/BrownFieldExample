@@ -5,8 +5,8 @@ const ScreenConfig = () => {
     'properties': {
         'title' : 'Upgrade to Premium',
         'subtitle': 'Daypacks delivered everytime you travel!',
-        'price': '$179.99 per year',
-        'sku': '123456',
+        'price': '$199.99 per year',
+        'sku': '123457',
     }
   }
   return

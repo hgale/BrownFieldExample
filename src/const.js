@@ -1,9 +1,11 @@
 import React from 'react';
 
 import UpsellScreenOne from './screens/UpsellScreenOne';
+import UpsellScreenTwo from './screens/UpsellScreenTwo';
 import NotFoundScreen from './screens/NotFoundScreen';
 
 import UpsellScreenOneConfig from './screens/UpsellScreenOne/config';
+import UpsellScreenTwoConfig from './screens/UpsellScreenTwo/config';
 
 export const AppEvents = {
   DismissScreen: 'DismissScreen',
@@ -14,6 +16,7 @@ export const AppEvents = {
 
 export const screens = {
   UpsellScreenOne: 'UpsellScreenOne',
+  UpsellScreenTwo: 'UpsellScreenTwo',  
   // These screens do not have a config file associated with them
   NotFoundScreen: 'NotFoundScreen',
   Query: 'Query'
@@ -29,17 +32,22 @@ export const getScreen = (props) => {
   if (screen === screens.UpsellScreenOne) {
     selectedScreen = <UpsellScreenOne {...props} />
   }
+  if (screen === screens.UpsellScreenTwo) {
+    selectedScreen = <UpsellScreenTwo {...props} />
+  } 
 
   return (selectedScreen);
 }
 
 export const ScreenList = () => {
   var screenOne = Object.assign({}, { 'name': screens.UpsellScreenOne, }, UpsellScreenOneConfig());
+  var screenTwo = Object.assign({}, { 'name': screens.UpsellScreenTwo, }, UpsellScreenTwoConfig());  
 
   return {
     'screens' :
     [
       screenOne,
+      screenTwo,
     ]
   }
   return

@@ -31,7 +31,17 @@ class ReactNativeViewController: HTReactNativeHostController {
 
         self.add(HTReactNativeEvent(name: RNEvents.ListScreens, handler: { info in
             guard let screens = info?[RNProperties.screens] as? [[String: Any]] else { return }
-            print("ListScreens passed back from ReactNative is ", screens)
+            ReactNativeScreenManager.sharedInstance.reset()
+            for screen in screens {
+                guard let name = screen["name"] as? String,
+                    let properties = screen["properties"] as? Dictionary<AnyHashable,Any> else {
+                    continue
+                }
+                print("Screen name is ", name)
+                print("Screen properties is ", properties)
+                ReactNativeScreenManager.sharedInstance.addScreen(screen: name, properties:properties)
+            }
+            //ReactNativeScreenManager
             // TODO: build arrray of screens and configs, then pick one randomly.
         }));
     }

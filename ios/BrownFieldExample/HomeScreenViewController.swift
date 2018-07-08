@@ -29,15 +29,16 @@ class HomeScreenViewController: UIViewController {
 
     @objc func buttonActionTwo(sender: UIButton!) {
         // maintain a static array of screens, then toggle between screens to pick.
-        ReactNativeViewController.applicationDidLaunch();
+        ReactNativeViewController.applicationDidLaunch()
     }
     
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
-        var properties : Dictionary = Dictionary<AnyHashable,Any>()
-        properties[RNProperties.screen] = RNScreens.UpsellScreenOne
+        // TODO: Add some guard statements in here
+        let screen = ReactNativeScreenManager.sharedInstance.getRandomScreen()
+        let properties = screen[RNProperties.properties]
         let viewController =
-            ReactNativeViewController(module: RNProperties.moduleName, properties: properties)
+            ReactNativeViewController(module: RNProperties.moduleName, properties: properties as! [AnyHashable : Any])
         self.present(viewController!, animated: false, completion: nil)
     }
     

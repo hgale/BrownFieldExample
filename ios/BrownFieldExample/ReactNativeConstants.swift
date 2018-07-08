@@ -25,10 +25,11 @@ public struct RNEvents {
 public struct RNProperties {
     /// Name of the react native bundle.
     public static let moduleName = "BrownFieldExample"
-    
     public static let getScreens = "getScreens"
     public static let screens = "screens"
     public static let screen = "screen"
+    public static let name = "name"
+    public static let properties = "properties"
 }
 
 public struct RNScreens {
