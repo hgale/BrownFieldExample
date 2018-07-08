@@ -25,9 +25,9 @@ class EntryPoint extends React.Component {
         );
       }
     );
-    const { getAvailableScreens } = this.props;
+    const { getScreens } = this.props;
 
-    if (getAvailableScreens) {
+    if (getScreens) {
       this.sendListOfScreens();
     }
 

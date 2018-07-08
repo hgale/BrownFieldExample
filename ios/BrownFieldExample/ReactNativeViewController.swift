@@ -19,17 +19,18 @@ class ReactNativeViewController: HTReactNativeHostController {
     }
 
     func setupEvents() {
-        self.add(HTReactNativeEvent(name: "DismissScreen", handler: { [weak self] _ in
+
+        self.add(HTReactNativeEvent(name: RNEvents.DismissScreen, handler: { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }))
 
-        self.add(HTReactNativeEvent(name: "EmitEvent", handler: { info in
+        self.add(HTReactNativeEvent(name: RNEvents.EmitEvent, handler: { info in
             guard let foo = info?["Foo"] as? String else { return }
             print("Value passed back from ReactNative is ", foo)
         }));
 
-        self.add(HTReactNativeEvent(name: "ListScreens", handler: { info in
-            guard let screens = info?["screens"] as? [[String: Any]] else { return }
+        self.add(HTReactNativeEvent(name: RNEvents.ListScreens, handler: { info in
+            guard let screens = info?[RNProperties.screens] as? [[String: Any]] else { return }
             print("ListScreens passed back from ReactNative is ", screens)
             // TODO: build arrray of screens and configs, then pick one randomly.
         }));
@@ -38,9 +39,9 @@ class ReactNativeViewController: HTReactNativeHostController {
     override class func applicationDidLaunch() {
         super.applicationDidLaunch()
         var properties : Dictionary = Dictionary<AnyHashable,Any>()
-        properties["screen"] = "Query"
-        properties["getAvailableScreens"] = true
-        ReactNativeViewController.queryController = ReactNativeViewController(module: "BrownFieldExample", properties: properties)
+        properties[RNProperties.screen] = RNScreens.Query
+        properties[RNProperties.getScreens] = true
+        ReactNativeViewController.queryController = ReactNativeViewController(module: RNProperties.moduleName, properties: properties)
         
     }
     

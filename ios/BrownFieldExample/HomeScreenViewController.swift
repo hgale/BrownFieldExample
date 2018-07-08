@@ -35,9 +35,9 @@ class HomeScreenViewController: UIViewController {
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
         var properties : Dictionary = Dictionary<AnyHashable,Any>()
-        properties["screen"] = "UpsellScreenOne"
+        properties[RNProperties.screen] = RNScreens.UpsellScreenOne
         let viewController =
-            ReactNativeViewController(module: "BrownFieldExample", properties: properties)
+            ReactNativeViewController(module: RNProperties.moduleName, properties: properties)
         self.present(viewController!, animated: false, completion: nil)
     }
     
