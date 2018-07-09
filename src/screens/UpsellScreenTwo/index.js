@@ -10,9 +10,9 @@ import colors from '../../colors';
 
 import Card from '../../card';
 
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dimensions, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-class UpsellScreenOne extends Component {
+class UpsellScreenTwo extends Component {
     dismissScreen = () => {
         EventBridge.emitEvent(this, AppEvents.DismissScreen); 
     }
@@ -34,6 +34,11 @@ class UpsellScreenOne extends Component {
                 <Text style={styles.subTitle}>{subtitle}</Text>        
             </View>
             <Card style={styles.cardContainer}>
+                <TouchableOpacity onPress={this.dismissScreen}>
+                    <View style={styles.closeButton}>
+                        <Text style={styles.closeX}>X</Text> 
+                    </View>
+                </TouchableOpacity>
                 <Text style={styles.redText}>React Native Screen</Text>
                 <View>
                     <View style={styles.priceCard}>
@@ -53,6 +58,9 @@ class UpsellScreenOne extends Component {
       }
 }
 
+
+const width = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -65,14 +73,24 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: 181, 
         marginLeft: 40,
-        marginRight: 40,        
-        // marginBottom: 40,
+        marginRight: 40,
         borderRadius: 2,
         borderColor: '#ddd',
         borderBottomWidth: 0,
     },
+    closeX: {
+        color: colors.red,        
+        marginRight: 15,
+        fontSize: 18,        
+    },
+    closeButton : {
+        justifyContent: 'center',
+        alignItems: 'flex-end', 
+        height: 50, 
+        width: (width * 0.8),
+    },
     button: {
-        backgroundColor: 'red',//colors.backgroundBlue,
+        backgroundColor: colors.red,
         justifyContent: 'center',
         height: 50, 
         margin: 20,
@@ -95,7 +113,6 @@ const styles = StyleSheet.create({
     priceText: {
         color: colors.lightBlue,
         textAlign: 'center',
-        // fontWeight: 'bold',
         fontSize: 18,
         marginTop: 20,
     },
@@ -140,4 +157,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default UpsellScreenOne
+export default UpsellScreenTwo
