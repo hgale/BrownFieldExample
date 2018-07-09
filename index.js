@@ -7,6 +7,8 @@ import { getScreen, AppEvents, ScreenList } from './src/const';
 
 import { AppRegistry } from 'react-native';
 
+console.disableYellowBox = true
+
 class EntryPoint extends React.Component {
 
   static contextTypes = {

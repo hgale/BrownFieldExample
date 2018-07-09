@@ -41,8 +41,6 @@ class ReactNativeViewController: HTReactNativeHostController {
                 print("Screen properties is ", properties)
                 ReactNativeScreenManager.sharedInstance.addScreen(screen: name, properties:properties)
             }
-            //ReactNativeScreenManager
-            // TODO: build arrray of screens and configs, then pick one randomly.
         }));
     }
     

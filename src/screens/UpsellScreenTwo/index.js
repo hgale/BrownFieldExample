@@ -24,31 +24,32 @@ class UpsellScreenOne extends Component {
     purchase = () => {
     }    
     
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Upgrade to Premium</Text>
-        <View style={styles.subTitleContainer}>
-            <Text style={styles.subTitle}>Daypacks delivered everytime you travel!</Text>        
-        </View>
-        <Card style={styles.cardContainer}>
-            <Text style={styles.redText}>MOST POPULAR</Text>
-            <View>
-                <View style={styles.priceCard}>
-                </View>
-                <View style={styles.priceTextContainer}>
-                    <Text style={styles.priceText}>$179.99 per year</Text>        
-                </View>                
+    render() {
+        const {price, title, subtitle} = this.props
+        return (
+          <View style={styles.container}>
+            <Text style={styles.title}>{title}</Text>
+            <View style={styles.subTitleContainer}>
+                <Text style={styles.subTitle}>{subtitle}</Text>        
             </View>
-            <TouchableOpacity onPress={this.dismissScreen}>
-                <View style={styles.button}>
-                    <Text style={styles.buttonText}>Purchase</Text> 
+            <Card style={styles.cardContainer}>
+                <Text style={styles.redText}>React Native Screen</Text>
+                <View>
+                    <View style={styles.priceCard}>
+                    </View>
+                    <View style={styles.priceTextContainer}>
+                        <Text style={styles.priceText}>{price}</Text>        
+                    </View>                
                 </View>
-            </TouchableOpacity>
-        </Card>
-      </View>
-    );
-  }
+                <TouchableOpacity onPress={this.dismissScreen}>
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Purchase</Text> 
+                    </View>
+                </TouchableOpacity>
+            </Card>
+          </View>
+        );
+      }
 }
 
 const styles = StyleSheet.create({
