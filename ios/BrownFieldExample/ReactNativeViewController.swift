@@ -27,8 +27,11 @@ class ReactNativeViewController: HTReactNativeHostController {
         self.add(HTReactNativeEvent(name: RNEvents.PurchaseItem, handler: { [weak self] info in
             guard let sku = info?[RNProperties.sku] as? String else { return }
             /// Integrate with native purchase system in order to use SKU to make purchase with apple pay etc
-            print("Item SKU is ", sku)
-            self?.dismiss(animated: true, completion: nil)
+            let alertMessage = "Using SKU: " + sku
+            let alert = UIAlertController(title: "Purchase Item",
+                                          message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self?.present(alert, animated: true, completion: nil)
         }));
 
         self.add(HTReactNativeEvent(name: RNEvents.ListScreens, handler: { info in
