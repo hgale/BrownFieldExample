@@ -13,27 +13,29 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        
-        let buttonOne = UIButton(frame: CGRect(x: 100, y: 100, width: 150, height: 50))
-        buttonOne.backgroundColor = .green
-        buttonOne.setTitle("React Native VC", for: .normal)
-        buttonOne.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        self.view.addSubview(buttonOne)
-        
-        let buttonTwo = UIButton(frame: CGRect(x: 100, y: 180, width: 150, height: 50))
-        buttonTwo.backgroundColor = .red
-        buttonTwo.setTitle("Pull screens", for: .normal)
-        buttonTwo.addTarget(self, action: #selector(buttonActionTwo), for: .touchUpInside)
-        self.view.addSubview(buttonTwo)
-    }
 
-    @objc func buttonActionTwo(sender: UIButton!) {
-        // maintain a static array of screens, then toggle between screens to pick.
-        ReactNativeViewController.applicationDidLaunch()
+        let title = UILabel()
+        title.text = "Native Screen"
+        title.font = title.font.withSize(25)
+        title.center.x = self.view.center.x - 75
+        title.center.y = self.view.center.y
+        title.textAlignment = .center
+        title.sizeToFit()
+        self.view.addSubview(title)
+
+        /// Button shows VC that displays an example promotion screen powered by React Native
+        let reactNativeVCButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
+        reactNativeVCButton.center.x = self.view.center.x
+        reactNativeVCButton.center.y = self.view.center.y + title.frame.height + 100
+        reactNativeVCButton.layer.borderWidth = 2.0
+        reactNativeVCButton.layer.borderColor = UIColor.black.cgColor
+        reactNativeVCButton.setTitleColor(.black, for: .normal)
+        reactNativeVCButton.setTitle("Show Promotion", for: .normal)
+        reactNativeVCButton.addTarget(self, action: #selector(showReactNativeVC), for: .touchUpInside)
+        self.view.addSubview(reactNativeVCButton)
     }
     
-    @objc func buttonAction(sender: UIButton!) {
-        print("Button tapped")
+    @objc func showReactNativeVC(sender: UIButton!) {
         // TODO: Add some guard statements in here
         let screen = ReactNativeScreenManager.sharedInstance.getRandomScreen()
         let properties = screen[RNProperties.properties]
