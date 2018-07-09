@@ -31,6 +31,7 @@ public struct RNProperties {
     public static let name = "name"
     public static let sku = "sku"
     public static let properties = "properties"
+    public static let screenName = "screenName"
 }
 
 public struct RNScreens {
