@@ -14,20 +14,17 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class UpsellScreenOne extends Component {
     dismissScreen = () => {
-        EventBridge.emitEvent(this, AppEvents.DismissScreen); 
+        EventBridge.emitEvent(this, AppEvents.DismissScreen);
     }
 
-    emitEvent = () => {
-        EventBridge.emitEvent(this, AppEvents.EmitEvent);
-    }  
-
-    purchase = () => {
+    purchase = (sku) => {
+        EventBridge.emitEvent(this, AppEvents.PurchaseItem, {sku});
     }    
     
-  render() {
-    const {price, title, subtitle} = this.props
+    render() {
+    const {price, title, subtitle, sku} = this.props
     return (
-      <View style={styles.container}>
+        <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.subTitleContainer}>
             <Text style={styles.subTitle}>{subtitle}</Text>        
@@ -41,15 +38,14 @@ class UpsellScreenOne extends Component {
                     <Text style={styles.priceText}>{price}</Text>        
                 </View>                
             </View>
-            <TouchableOpacity onPress={this.dismissScreen}>
+            <TouchableOpacity onPress={this.purchase.bind(this, sku)}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>Purchase</Text> 
                 </View>
             </TouchableOpacity>
         </Card>
-      </View>
-    );
-  }
+        </View>);
+    }
 }
 
 const styles = StyleSheet.create({

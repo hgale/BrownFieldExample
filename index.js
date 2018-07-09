@@ -41,7 +41,7 @@ class EntryPoint extends React.Component {
   }
 
   sendListOfScreens = () => {
-    EventBridge.emitEvent(this, AppEvents.ListScreens, ScreenList());  
+    EventBridge.emitEvent(this, AppEvents.ListScreens, ScreenList());
   }
 
   render() {

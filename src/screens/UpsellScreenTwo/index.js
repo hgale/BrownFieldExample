@@ -21,11 +21,12 @@ class UpsellScreenOne extends Component {
         EventBridge.emitEvent(this, AppEvents.EmitEvent);
     }  
 
-    purchase = () => {
-    }    
+    purchase = (sku) => {
+        EventBridge.emitEvent(this, AppEvents.PurchaseItem, {sku});   
+    }
     
     render() {
-        const {price, title, subtitle} = this.props
+        const {price, title, subtitle, sku} = this.props
         return (
           <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
@@ -41,7 +42,7 @@ class UpsellScreenOne extends Component {
                         <Text style={styles.priceText}>{price}</Text>        
                     </View>                
                 </View>
-                <TouchableOpacity onPress={this.dismissScreen}>
+                <TouchableOpacity onPress={this.purchase.bind(this, sku)}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Purchase</Text> 
                     </View>

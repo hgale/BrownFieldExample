@@ -9,6 +9,7 @@ import UpsellScreenTwoConfig from './screens/UpsellScreenTwo/config';
 
 export const AppEvents = {
   DismissScreen: 'DismissScreen',
+  PurchaseItem: 'PurchaseItem',
   ListScreens: 'ListScreens',
   EmitEvent: 'EmitEvent',
   PurchaseSubscription: 'PurchaseSubscription',
