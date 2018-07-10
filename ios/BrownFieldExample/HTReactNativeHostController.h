@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class HTReactNativeEvent;
-@class HTReactNativeHostController;
-@class RCTBridge;
 
 @interface HTReactNativeHostController : UIViewController
 

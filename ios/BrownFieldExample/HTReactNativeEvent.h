@@ -17,7 +17,7 @@ typedef void (^HTReactNativeEventHandler)(NSDictionary *info);
 
 /**
  * @param    name unique name of this event NSString
- * @param    handler gets called when MSREventBridge send an event
+ * @param    handler gets called when MSREventBridge sends an event
              that corresponds to the unique name.
  * @return   HTReactNativeEvent instance.
  **/
