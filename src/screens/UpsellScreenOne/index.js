@@ -9,10 +9,12 @@ import { AppEvents } from '../../const';
 
 import colors from '../../colors';
 
+import LineImage from '../../assets/Line.png';
+
 import Card from '../../card';
 import Curve from '../../curve';
 
-import { Dimensions, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dimensions, Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class UpsellScreenOne extends Component {
     dismissScreen = () => {
@@ -38,6 +40,11 @@ class UpsellScreenOne extends Component {
         </TouchableOpacity>
         <Curve color={colors.darkBlue}/>        
         <Card style={styles.cardContainer}>
+            <View style={styles.lineContainer}>
+                <View style={styles.lineBackground}>
+                    <Image style={styles.lineImage} source={LineImage} />
+                </View>
+            </View>
             <Text style={styles.rnText}>React Native Screen</Text>
             <View>
                 <View style={styles.priceCard}>
@@ -73,6 +80,24 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    lineContainer: {
+        top:-25,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    lineBackground: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 100,
+        height: 100,
+        borderRadius: 100/2,
+        backgroundColor: colors.white
+    },
+    lineImage: {
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     priceBannerText: {
         color: colors.white,
