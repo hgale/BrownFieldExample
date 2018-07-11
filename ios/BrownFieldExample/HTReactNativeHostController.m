@@ -18,7 +18,7 @@
 static NSString * const kBundleURL =  @"http://localhost:8081/index.bundle?platform=ios";
 static NSString * const kPredicateFormat = @"name == %@";
 
-static BOOL kDevloperMode = true;//false;
+static BOOL kDevloperMode = false;
 
 @interface MSREventBridgeBridgeManager : NSObject
 

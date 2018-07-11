@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     lineContainer: {
-        top:-25,
+        top:-20,
         alignItems: 'center',
         justifyContent: 'center',
     },
