@@ -3,12 +3,14 @@
 import React, { Component } from 'react';
 
 import EventBridge from 'react-native-event-bridge';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { AppEvents } from '../../const';
 
 import colors from '../../colors';
 
 import Card from '../../card';
+import Curve from '../../curve';
 
 import { Dimensions, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
@@ -24,7 +26,7 @@ class UpsellScreenOne extends Component {
     render() {
     const {price, title, subtitle, sku} = this.props
     return (
-        <View style={styles.container}>
+        <LinearGradient colors={[colors.darkBlue, colors.powderBlue, colors.darkPurple]} style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.subTitleContainer}>
             <Text style={styles.subTitle}>{subtitle}</Text>        
@@ -34,6 +36,7 @@ class UpsellScreenOne extends Component {
                     <Text style={styles.closeX}>X</Text> 
                 </View>
         </TouchableOpacity>
+        <Curve color={colors.darkBlue}/>        
         <Card style={styles.cardContainer}>
             <Text style={styles.rnText}>React Native Screen</Text>
             <View>
@@ -49,7 +52,8 @@ class UpsellScreenOne extends Component {
                 </View>
             </TouchableOpacity>
         </Card>
-        </View>);
+        </LinearGradient>        
+        );
     }
 }
 
@@ -60,7 +64,6 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.darkBlue,
     },
     priceCard: {
         backgroundColor: colors.white,
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     priceText: {
-        color: colors.lightBlue,
+        color: colors.darkText,
         textAlign: 'center',
         fontSize: 18,
         marginTop: 20,
