@@ -22,6 +22,9 @@ target 'BrownFieldExample' do
     'RCTWebSocket', # needed for debugging
     # Add any other subspecs you want to use in your project
   ]
+
+  # Use a third party library for linear gradient
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
   # Pods for BrownFieldExample
   pod 'MSREventBridge', :path => '../node_modules/react-native-event-bridge/MSREventBridge.podspec'
   
