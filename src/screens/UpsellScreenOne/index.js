@@ -24,7 +24,7 @@ class UpsellScreenOne extends Component {
     }    
     
     render() {
-    const {price, title, subtitle, sku} = this.props
+    const {price, title, subtitle, sku, monthlyPrice} = this.props
     return (
         <LinearGradient colors={[colors.darkBlue, colors.powderBlue, colors.darkPurple]} style={styles.container}>
         <Text style={styles.title}>{title}</Text>
@@ -46,6 +46,10 @@ class UpsellScreenOne extends Component {
                             12 outfits per year
                         </Text>
                     </View>
+                    <View style={styles.priceInner}>
+                        <Text style={styles.monthlyPrice}> {monthlyPrice} </Text>
+                        <Text style={styles.footerPrice} > Per Month</Text>
+                    </View>                    
                 </View>
                 <View style={styles.priceTextContainer}>
                     <Text style={styles.priceText}>{price}</Text>        
@@ -83,6 +87,21 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 2,         
         height: 40, 
     },
+    priceInner:{
+        marginTop: 30,
+        alignItems: 'center',
+        justifyContent: 'center',        
+    },
+    footerPrice: {
+        color: colors.darkText,
+        fontSize: 14,
+    },
+    monthlyPrice: {
+        color: colors.darkText,
+        fontWeight: 'bold',
+        fontSize: 24,
+        marginBottom: 10,
+    },    
     priceCard: {
         backgroundColor: colors.white,
         justifyContent: 'flex-start',        

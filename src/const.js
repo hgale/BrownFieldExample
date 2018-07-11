@@ -41,13 +41,13 @@ export const getScreen = (props) => {
 }
 
 export const ScreenList = () => {
-  // var screenOne = Object.assign({}, { 'name': screens.UpsellScreenOne, }, UpsellScreenOneConfig());
+  var screenOne = Object.assign({}, { 'name': screens.UpsellScreenOne, }, UpsellScreenOneConfig());
   var screenTwo = Object.assign({}, { 'name': screens.UpsellScreenTwo, }, UpsellScreenTwoConfig());
 
   return {
     'screens' :
     [
-      // screenOne,
+      screenOne,
       screenTwo,
     ]
   }

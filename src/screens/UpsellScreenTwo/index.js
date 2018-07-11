@@ -24,7 +24,7 @@ class UpsellScreenTwo extends Component {
     }    
     
     render() {
-    const {price, title, subtitle, sku} = this.props
+    const {price, title, subtitle, sku, monthlyPrice} = this.props
     return (
         <LinearGradient colors={[colors.darkPurple, colors.powderBlue]} style={styles.container}>
         <Text style={styles.title}>{title}</Text>
@@ -45,6 +45,10 @@ class UpsellScreenTwo extends Component {
                         <Text style={styles.priceBannerText}>
                             12 outfits per year
                         </Text>
+                    </View>
+                    <View style={styles.priceInner}>
+                        <Text style={styles.monthlyPrice}> {monthlyPrice} </Text>
+                        <Text style={styles.footerPrice} > Per Month</Text>
                     </View>
                 </View>
                 <View style={styles.priceTextContainer}>
@@ -75,11 +79,26 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    priceInner:{
+        marginTop: 30,
+        alignItems: 'center',
+        justifyContent: 'center',        
+    },
+    footerPrice: {
+        color: colors.darkText,
+        fontSize: 14,
+    },
+    monthlyPrice: {
+        color: colors.darkText,
+        fontWeight: 'bold',
+        fontSize: 24,
+        marginBottom: 10,
+    },
     priceBanner:{
         backgroundColor: colors.backgroundBlue,
         borderTopLeftRadius: 2,
         alignItems: 'center',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         borderTopRightRadius: 2,         
         height: 40, 
     },

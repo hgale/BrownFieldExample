@@ -7,6 +7,7 @@ const ScreenConfig = () => {
         'subtitle': 'Daypacks delivered everytime you travel!',
         'price': '$179.99 per year',
         'sku': '123456',
+        'monthlyPrice' : '$14.99',        
     }
   }
   return
