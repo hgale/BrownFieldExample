@@ -21,7 +21,7 @@ const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: colors.cardColor,
+      backgroundColor: colors.powderBlue,
       width: (width * 0.8),
       height: (height * 0.75), 
       marginLeft: 40,

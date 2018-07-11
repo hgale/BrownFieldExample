@@ -29,13 +29,13 @@ class UpsellScreenOne extends Component {
         <View style={styles.subTitleContainer}>
             <Text style={styles.subTitle}>{subtitle}</Text>        
         </View>
-        <Card style={styles.cardContainer}>
-            <TouchableOpacity onPress={this.dismissScreen}>
+        <TouchableOpacity onPress={this.dismissScreen}>
                 <View style={styles.closeButton}>
                     <Text style={styles.closeX}>X</Text> 
                 </View>
-            </TouchableOpacity>
-            <Text style={styles.redText}>React Native Screen</Text>
+        </TouchableOpacity>
+        <Card style={styles.cardContainer}>
+            <Text style={styles.rnText}>React Native Screen</Text>
             <View>
                 <View style={styles.priceCard}>
                 </View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.backgroundBlue,
+      backgroundColor: colors.darkBlue,
     },
     priceCard: {
         backgroundColor: colors.white,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0,
     },
     closeX: {
-        color: colors.red,        
+        color: colors.backgroundBlue,
         marginRight: 15,
         fontSize: 18,        
     },
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginTop: 20,
     },
-    redText: {
-        color: colors.red,
+    rnText: {
+        color: colors.darkText,
         textAlign: 'center',
         fontSize: 16,
         marginTop: 20,
@@ -133,16 +133,14 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         fontSize: 16,
-        color: colors.white,        
+        color: colors.darkText,
         textAlign: 'center',
-        margin: 10,
       },    
     title: {
-      color: colors.white,
+      color: colors.darkText,
       fontWeight: 'bold',
       fontSize: 20,
       textAlign: 'center',
-      margin: 10,
     },
     scores: {
       textAlign: 'center',
