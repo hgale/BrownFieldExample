@@ -32,15 +32,20 @@ class UpsellScreenOne extends Component {
             <Text style={styles.subTitle}>{subtitle}</Text>        
         </View>
         <TouchableOpacity onPress={this.dismissScreen}>
-                <View style={styles.closeButton}>
-                    <Text style={styles.closeX}>X</Text> 
-                </View>
+            <View style={styles.closeButton}>
+                <Text style={styles.closeX}>X</Text> 
+            </View>
         </TouchableOpacity>
         <Curve color={colors.darkBlue}/>        
         <Card style={styles.cardContainer}>
             <Text style={styles.rnText}>React Native Screen</Text>
             <View>
                 <View style={styles.priceCard}>
+                    <View style={styles.priceBanner}> 
+                        <Text style={styles.priceBannerText}>
+                            12 outfits per year
+                        </Text>
+                    </View>
                 </View>
                 <View style={styles.priceTextContainer}>
                     <Text style={styles.priceText}>{price}</Text>        
@@ -65,9 +70,22 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    priceBannerText: {
+        color: colors.white,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    priceBanner:{
+        backgroundColor: colors.backgroundBlue,
+        borderTopLeftRadius: 2,
+        alignItems: 'center',
+        justifyContent: 'center', 
+        borderTopRightRadius: 2,         
+        height: 40, 
+    },
     priceCard: {
         backgroundColor: colors.white,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',        
         height: 181, 
         marginLeft: 40,
         marginRight: 40,
@@ -78,11 +96,11 @@ const styles = StyleSheet.create({
     closeX: {
         color: colors.backgroundBlue,
         marginRight: 15,
-        fontSize: 18,        
+        fontSize: 18,
     },
     closeButton : {
         justifyContent: 'center',
-        alignItems: 'flex-end', 
+        alignItems: 'flex-end',
         height: 50, 
         width: (width * 0.8),
     },    

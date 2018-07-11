@@ -8,8 +8,9 @@ import colors from './colors';
 
 class Curve extends React.Component {
   render() {
+    const { color } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: color}]}>
         {this.props.children}
       </View>
     );
@@ -34,9 +35,8 @@ const styles = StyleSheet.create({
       },
   });
 
-  Counter.propTypes = {
-    incrementCounter: PropTypes.func.isRequired,
-    count: PropTypes.number.isRequired,
+  Curve.propTypes = {
+    color: PropTypes.string.isRequired,
   };
   
 export default Curve
