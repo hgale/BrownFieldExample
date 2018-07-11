@@ -3,61 +3,64 @@
 import React, { Component } from 'react';
 
 import EventBridge from 'react-native-event-bridge';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { AppEvents } from '../../const';
 
 import colors from '../../colors';
 
 import Card from '../../card';
+import Curve from '../../curve';
 
 import { Dimensions, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class UpsellScreenTwo extends Component {
     dismissScreen = () => {
-        EventBridge.emitEvent(this, AppEvents.DismissScreen); 
+        EventBridge.emitEvent(this, AppEvents.DismissScreen);
     }
-
-    emitEvent = () => {
-        EventBridge.emitEvent(this, AppEvents.EmitEvent);
-    }  
 
     purchase = (sku) => {
-        EventBridge.emitEvent(this, AppEvents.PurchaseItem, {sku});   
-    }
+        EventBridge.emitEvent(this, AppEvents.PurchaseItem, {sku});
+    }    
     
     render() {
-        const {price, title, subtitle, sku} = this.props
-        return (
-          <View style={styles.container}>
-            <Text style={styles.title}>{title}</Text>
-            <View style={styles.subTitleContainer}>
-                <Text style={styles.subTitle}>{subtitle}</Text>        
+    const {price, title, subtitle, sku} = this.props
+    return (
+        <LinearGradient colors={[colors.darkPurple, colors.powderBlue]} style={styles.container}>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.subTitleContainer}>
+            <Text style={styles.subTitle}>{subtitle}</Text>        
+        </View>
+        <TouchableOpacity onPress={this.dismissScreen}>
+            <View style={styles.closeButton}>
+                <Text style={styles.closeX}>X</Text> 
             </View>
-            <Card style={styles.cardContainer}>
-                <TouchableOpacity onPress={this.dismissScreen}>
-                    <View style={styles.closeButton}>
-                        <Text style={styles.closeX}>X</Text> 
+        </TouchableOpacity>
+        <Curve color={colors.darkPurple}/>        
+        <Card style={styles.cardContainer}>
+            <Text style={styles.rnText}>React Native Screen</Text>
+            <View>
+                <View style={styles.priceCard}>
+                    <View style={styles.priceBanner}> 
+                        <Text style={styles.priceBannerText}>
+                            12 outfits per year
+                        </Text>
                     </View>
-                </TouchableOpacity>
-                <Text style={styles.redText}>React Native Screen</Text>
-                <View>
-                    <View style={styles.priceCard}>
-                    </View>
-                    <View style={styles.priceTextContainer}>
-                        <Text style={styles.priceText}>{price}</Text>        
-                    </View>                
                 </View>
-                <TouchableOpacity onPress={this.purchase.bind(this, sku)}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Purchase</Text> 
-                    </View>
-                </TouchableOpacity>
-            </Card>
-          </View>
+                <View style={styles.priceTextContainer}>
+                    <Text style={styles.priceText}>{price}</Text>        
+                </View>                
+            </View>
+            <TouchableOpacity onPress={this.purchase.bind(this, sku)}>
+                <View style={styles.button}>
+                    <Text style={styles.buttonText}>Purchase</Text> 
+                </View>
+            </TouchableOpacity>
+        </Card>
+        </LinearGradient>        
         );
-      }
+    }
 }
-
 
 const width = Dimensions.get('window').width
 
@@ -66,11 +69,23 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.backgroundBlue,
+    },
+    priceBannerText: {
+        color: colors.white,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    priceBanner:{
+        backgroundColor: colors.backgroundBlue,
+        borderTopLeftRadius: 2,
+        alignItems: 'center',
+        justifyContent: 'center', 
+        borderTopRightRadius: 2,         
+        height: 40, 
     },
     priceCard: {
         backgroundColor: colors.white,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',        
         height: 181, 
         marginLeft: 40,
         marginRight: 40,
@@ -79,18 +94,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0,
     },
     closeX: {
-        color: colors.red,        
+        color: colors.backgroundBlue,
         marginRight: 15,
-        fontSize: 18,        
+        fontSize: 18,
     },
     closeButton : {
         justifyContent: 'center',
-        alignItems: 'flex-end', 
+        alignItems: 'flex-end',
         height: 50, 
         width: (width * 0.8),
-    },
+    },    
     button: {
-        backgroundColor: colors.red,
+        backgroundColor: colors.backgroundBlue,
         justifyContent: 'center',
         height: 50, 
         margin: 20,
@@ -111,13 +126,13 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     priceText: {
-        color: colors.lightBlue,
+        color: colors.darkText,
         textAlign: 'center',
         fontSize: 18,
         marginTop: 20,
     },
-    redText: {
-        color: colors.red,
+    rnText: {
+        color: colors.darkText,
         textAlign: 'center',
         fontSize: 16,
         marginTop: 20,
@@ -139,16 +154,14 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         fontSize: 16,
-        color: colors.white,        
+        color: colors.white,
         textAlign: 'center',
-        margin: 10,
       },    
     title: {
       color: colors.white,
       fontWeight: 'bold',
       fontSize: 20,
       textAlign: 'center',
-      margin: 10,
     },
     scores: {
       textAlign: 'center',
