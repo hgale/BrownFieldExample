@@ -18,8 +18,8 @@ class Curve extends React.Component {
 }
 
 const width = (Dimensions.get('window').width * 1.2);
-
 const height = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',

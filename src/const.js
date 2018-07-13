@@ -23,7 +23,7 @@ export const screens = {
   Query: 'Query'
 }
 
-// Add new screens addressable by Switchboard to this switch statement
+// Add new screens addressable by experiments framework to this switch statement
 export const getScreen = (props) => {
   console.log('getScreen hit with ', props);
   
