@@ -22,7 +22,7 @@ class UpsellScreenSales extends Component {
     }
 
     purchase = (sku) => {
-        EventBridge.emitEvent(this, AppEvents.PurchaseItem, {sku});
+        EventBridge.emitEvent(this, AppEvents.ExampleEvent, {sku});
     }    
     
     render() {

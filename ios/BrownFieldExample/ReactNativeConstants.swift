@@ -13,6 +13,7 @@ import Foundation
 public struct RNEvents {
     public static let DismissScreen = "DismissScreen"
     public static let PurchaseItem = "PurchaseItem"
+    public static let ExampleEvent = "ExampleEvent"
     // Test event which causes react native
     public static let EmitEvent = "EmitEvent"
         
@@ -37,4 +38,5 @@ public struct RNProperties {
 public struct RNScreens {
     public static let Query = "Query"
     public static let UpsellScreenOne = "UpsellScreenOne"
+    public static let UpsellScreenSales = "UpsellScreenSales"
 }
