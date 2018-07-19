@@ -33,7 +33,18 @@ class ReactNativeViewController: HTReactNativeHostController {
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self?.present(alert, animated: true, completion: nil)
         }));
-
+        
+        self.add(HTReactNativeEvent(name: RNEvents.ExampleEvent, handler: { [weak self] info in
+            guard let sku = info?[RNProperties.sku] as? String else { return }
+            /// Integrate with native purchase system in order to use SKU to make purchase with apple pay etc
+            let alertMessage = "Using ID: " + sku
+            let alert = UIAlertController(title: "Exampleevent hit!!!",
+                                          message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self?.present(alert, animated: true, completion: nil)
+            self?.sendReactNativeEvent(withName:RNEvents.EmitEvent, info: ["foo" : "bar"])
+        }));
+        
         self.add(HTReactNativeEvent(name: RNEvents.ListScreens, handler: { info in
             guard let screens = info?[RNProperties.screens] as? [[String: Any]] else { return }
             ReactNativeScreenManager.sharedInstance.reset()

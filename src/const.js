@@ -13,6 +13,7 @@ export const AppEvents = {
   DismissScreen: 'DismissScreen',
   PurchaseItem: 'PurchaseItem',
   ListScreens: 'ListScreens',
+  ExampleEvent: 'ExampleEvent',
   EmitEvent: 'EmitEvent',
   PurchaseSubscription: 'PurchaseSubscription',
 }
@@ -54,8 +55,8 @@ export const ScreenList = () => {
   return {
     'screens' :
     [
-      screenOne,
-      screenTwo,
+      // screenOne,
+      // screenTwo,
       screenThree,
     ]
   }
