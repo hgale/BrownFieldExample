@@ -55,7 +55,7 @@ class ReactNativeViewController: HTReactNativeHostController {
         properties[RNProperties.screen] = RNScreens.Query
         properties[RNProperties.getScreens] = true
         ReactNativeViewController.queryController = ReactNativeViewController(module: RNProperties.moduleName, properties: properties)
-        
+        ReactNativeViewController.queryController?.loadView()
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) not implemented") }
