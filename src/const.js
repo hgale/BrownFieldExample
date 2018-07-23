@@ -4,8 +4,8 @@ import UpsellScreenOne from './screens/UpsellScreenOne';
 import UpsellScreenTwo from './screens/UpsellScreenTwo';
 import NotFoundScreen from './screens/NotFoundScreen';
 
-import UpsellScreenOneConfig from './screens/UpsellScreenOne/config';
-import UpsellScreenTwoConfig from './screens/UpsellScreenTwo/config';
+var UpsellScreenOneConfig = require('./screens/UpsellScreenOne/config.json');
+var UpsellScreenTwoConfig = require('./screens/UpsellScreenTwo/config.json');
 
 // All native events supported by this bundle
 export const AppEvents = {
@@ -50,7 +50,7 @@ export const getScreen = (props) => {
 export const ScreenList = () => {
   let screenConfigs = []
   for (var key in screens) {
-    var screen = Object.assign({}, { 'name': key, }, screens[key].config());
+    var screen = Object.assign({}, { 'name': key, }, screens[key].config);
     screenConfigs.push(screen);
   }
   return {
