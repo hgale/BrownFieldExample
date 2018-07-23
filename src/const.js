@@ -15,34 +15,37 @@ export const AppEvents = {
   PurchaseSubscription: 'PurchaseSubscription',
 }
 
-export const screens = {
-  UpsellScreenOne: 'UpsellScreenOne',
-  UpsellScreenTwo: 'UpsellScreenTwo',  
-  // These screens do not have a config file associated with them
-  NotFoundScreen: 'NotFoundScreen',
-  Query: 'Query'
-}
+// This is only used when querying for screens, it has no UI component
+const QueryScreen = 'Query'
 
-// Add new screens addressable by experiments framework to this switch statement
+// List of all screens that can be displayed 
+screens = {
+  UpsellScreenOne: UpsellScreenOne,
+  UpsellScreenTwo: UpsellScreenTwo
+};
+
+/**
+ * get screen
+ * @param {Object} props - contains name of screen to instantiate and default props
+ * to use when doing it
+ */
 export const getScreen = (props) => {
-  console.log('getScreen hit with ', props);
-  
-  const { screen } = props;
-
-  let selectedScreen = <NotFoundScreen {...props} />
-  if (screen === screens.UpsellScreenOne) {
-    selectedScreen = <UpsellScreenOne {...props} />
+  if (!(props instanceof Object) || 
+      !('screen' in props) ||
+      (props.screen == QueryScreen) ||
+      !(props.screen in screens)) {
+    console.log('Screen not found');
+    return (<NotFoundScreen />);
   }
-  if (screen === screens.UpsellScreenTwo) {
-    selectedScreen = <UpsellScreenTwo {...props} />
-  } 
 
-  return (selectedScreen);
+  const UpsellScreen = screens[props.screen];
+  return (<UpsellScreen {...props} />);
 }
 
 export const ScreenList = () => {
-  var screenOne = Object.assign({}, { 'name': screens.UpsellScreenOne, }, UpsellScreenOneConfig());
-  var screenTwo = Object.assign({}, { 'name': screens.UpsellScreenTwo, }, UpsellScreenTwoConfig());
+  // Figure out how to dynamically generate this
+  var screenOne = Object.assign({}, { 'name': 'UpsellScreenOne', }, UpsellScreenOneConfig());
+  var screenTwo = Object.assign({}, { 'name': 'UpsellScreenTwo', }, UpsellScreenTwoConfig());
 
   return {
     'screens' :
