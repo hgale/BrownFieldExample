@@ -15,6 +15,8 @@ typedef void (^HTReactNativeEventHandler)(NSDictionary *info);
 @property (nonatomic, copy, readonly) HTReactNativeEventHandler handler;
 @property (nonatomic, copy, readonly) NSString *name;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  * @param    name unique name of this event NSString
  * @param    handler gets called when MSREventBridge sends an event

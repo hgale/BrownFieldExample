@@ -10,11 +10,6 @@
 
 @implementation HTReactNativeEvent
 
-- (id)init {
-    NSAssert(![self isMemberOfClass:[HTReactNativeEvent class]], @"Do not call init directly!");
-    return [super init];
-}
-
 - (id)initWithName:(NSString *)name
            handler:(HTReactNativeEventHandler)handler
 {
@@ -23,7 +18,7 @@
     if (self = [super init])
     {
         _handler = [handler copy];
-        _name = name;
+        _name = [name copy];
     }
     
     return self;

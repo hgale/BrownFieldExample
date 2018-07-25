@@ -4,9 +4,10 @@ import UpsellScreenOne from './screens/UpsellScreenOne';
 import UpsellScreenTwo from './screens/UpsellScreenTwo';
 import NotFoundScreen from './screens/NotFoundScreen';
 
-import UpsellScreenOneConfig from './screens/UpsellScreenOne/config';
-import UpsellScreenTwoConfig from './screens/UpsellScreenTwo/config';
+var UpsellScreenOneConfig = require('./screens/UpsellScreenOne/config.json');
+var UpsellScreenTwoConfig = require('./screens/UpsellScreenTwo/config.json');
 
+// All native events supported by this bundle
 export const AppEvents = {
   DismissScreen: 'DismissScreen',
   PurchaseItem: 'PurchaseItem',
@@ -15,43 +16,46 @@ export const AppEvents = {
   PurchaseSubscription: 'PurchaseSubscription',
 }
 
-export const screens = {
-  UpsellScreenOne: 'UpsellScreenOne',
-  UpsellScreenTwo: 'UpsellScreenTwo',  
-  // These screens do not have a config file associated with them
-  NotFoundScreen: 'NotFoundScreen',
-  Query: 'Query'
-}
+// This is only used when querying for screens, it has no UI component
+const QueryScreen = 'Query'
 
-// Add new screens addressable by experiments framework to this switch statement
+// List of all screens that can be displayed 
+screens = {
+  UpsellScreenOne: {
+    screen: UpsellScreenOne,
+    config: UpsellScreenOneConfig
+  },
+  UpsellScreenTwo: {
+    screen: UpsellScreenTwo,
+    config: UpsellScreenTwoConfig
+  },
+};
+
+/**
+ * get screen
+ * @param {Object} props - contains name of screen to instantiate and default props to use.
+ */
 export const getScreen = (props) => {
-  console.log('getScreen hit with ', props);
-  
-  const { screen } = props;
-
-  let selectedScreen = <NotFoundScreen {...props} />
-  if (screen === screens.UpsellScreenOne) {
-    selectedScreen = <UpsellScreenOne {...props} />
+  if (!(props instanceof Object) || 
+      !('screen' in props) ||
+      (props.screen == QueryScreen) ||
+      !(props.screen in screens)) {
+    return (<NotFoundScreen />);
   }
-  if (screen === screens.UpsellScreenTwo) {
-    selectedScreen = <UpsellScreenTwo {...props} />
-  } 
 
-  return (selectedScreen);
+  const UpsellScreen = screens[props.screen].screen;
+  return (<UpsellScreen {...props} />);
 }
 
 export const ScreenList = () => {
-  var screenOne = Object.assign({}, { 'name': screens.UpsellScreenOne, }, UpsellScreenOneConfig());
-  var screenTwo = Object.assign({}, { 'name': screens.UpsellScreenTwo, }, UpsellScreenTwoConfig());
-
-  return {
-    'screens' :
-    [
-      screenOne,
-      screenTwo,
-    ]
+  let screenConfigs = []
+  for (var key in screens) {
+    var screen = Object.assign({}, { 'name': key, }, screens[key].config);
+    screenConfigs.push(screen);
   }
-  return
+  return {
+    'screens' : screenConfigs
+  }
 }
 
 export const version = '0.0.1';

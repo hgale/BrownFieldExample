@@ -85,19 +85,17 @@ static BOOL kDevloperMode = false;
     return [super init];
 }
 
-// TODO add asset to stup 
 - (id)initWithModule:(NSString *)moduleName properties:(NSDictionary *)properties {
     self = [super initWithNibName:nil bundle:nil];
     if (!self) return nil;
     _moduleName = moduleName;
     _properties = properties;
     _events = [NSMutableArray new];
-    [self setupView];
     return self;
 }
 
-- (void)setupView {
-    [self.view layoutIfNeeded];
+- (void)loadView
+{
     self.view = [[MSREventBridgeBridgeManager sharedInstance] viewForModuleName:_moduleName initialProperties:_properties];
 }
 
