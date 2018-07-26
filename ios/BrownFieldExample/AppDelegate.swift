@@ -15,8 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        // Pull All of the screens at launch time
-        ReactNativeViewController.applicationDidLaunch()
         let mainViewController = HomeScreenViewController()
         window!.rootViewController = mainViewController
         window!.makeKeyAndVisible()

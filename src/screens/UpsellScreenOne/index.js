@@ -27,6 +27,7 @@ class UpsellScreenOne extends Component {
     
     render() {
     const {price, title, subtitle, sku, monthlyPrice} = this.props
+
     return (
         <LinearGradient colors={[colors.darkBlue, colors.powderBlue, colors.darkPurple]} style={styles.container}>
         <Text style={styles.title}>{title}</Text>

@@ -8,13 +8,14 @@ try {
     const screenPath = path.join(__dirname, '..', 'src', 'screens');
     const iosPath = path.join(__dirname, '..', 'ios', 'BrownFieldExample', 'screens.json');
     fs.readdir(screenPath, function(err, items) {
-        let screens = {}
+        let screens = []
         //'screens' : screenConfigs
-        let addProperties = (item, properties, lastFile) => {
-            screens[item]['properties'] = properties
+        let addProperties = (config, properties, lastFile) => {
+            config['properties'] = JSON.parse(properties)
+            screens.push(config)
             if (lastFile) {
                 console.log('Screens config file is', screens);
-                fs.writeFileSync(iosPath, JSON.stringify(screens), 'utf8');
+                fs.writeFileSync(iosPath, JSON.stringify({'screens':screens}), 'utf8');
             }
         }
         items = items.filter(item => item !== 'NotFoundScreen');
@@ -22,8 +23,8 @@ try {
             items.forEach( (item, index) => {
                 console.log('Index is ', index)
                 console.log(item);
-                screens[item] = {};
-                screens[item]['name'] = item;
+                let config = {}
+                config['name'] = item;
                 const configPath = path.join(__dirname, '..', 'src', 'screens', item, 'config.json');
                 fs.readFile(configPath, 'utf8', function (err, data) {
                     if (err) {
@@ -31,7 +32,7 @@ try {
                     }
                     console.log('Adding data', data);
                     console.log('length is ', items.length);
-                    addProperties(item, data, index === (items.length-1));
+                    addProperties(config, data, index === (items.length-1));
                   });
             });
         }

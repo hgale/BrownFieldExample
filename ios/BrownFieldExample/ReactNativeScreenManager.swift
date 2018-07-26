@@ -15,19 +15,24 @@ class ReactNativeScreenManager {
     fileprivate var screens = [String]()
 
     init() {
-        /// Load screens from JSON file
-        if let path = Bundle.main.path(forResource: "screens", ofType: "json") {
+        /// screens.json is generated from the contents of the src/screens directory via a script that run as a post compile script
+        /// This script iterates through all of the screens in the screens directory.
+        if let path = Bundle.main.path(forResource: RNProperties.screens, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let screensJSON = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                print("screensJSON is ")
-                print(screensJSON)
-//                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let person = jsonResult["person"] as? [Any] {
-//                    // do stuff
-//                }
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+
+                if let jsonResult = json as? Dictionary<String, AnyObject>, let screens = jsonResult[RNProperties.screens] as? [[String: Any]] {
+                    for screen in screens {
+                        guard let name = screen[RNProperties.name] as? String,
+                            let properties = screen[RNProperties.properties] as? Dictionary<String, AnyObject> else {
+                                continue
+                        }
+                        self.addScreen(screen: name, properties:properties)
+                    }
+                }
             } catch {
-                // handle error
-                print("Error")
+                print("Error occurred reading screens.json")
             }
         }
     }
