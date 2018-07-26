@@ -132,6 +132,7 @@
 				8BE2498B20D744A80014CBCF /* Frameworks */,
 				8BE2498C20D744A80014CBCF /* Resources */,
 				A11C18C06F0BCEE70B91674C /* [CP] Embed Pods Frameworks */,
+				8BD954F8210A87D8005DB659 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -191,6 +192,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8BD954F8210A87D8005DB659 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/node  $PROJECT_DIR\"../../scripts/screens.js\" ";
+		};
 		A11C18C06F0BCEE70B91674C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
