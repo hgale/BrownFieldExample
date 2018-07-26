@@ -13,6 +13,7 @@
 		8B6D4E5420F24E320026A365 /* ReactNativeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6D4E5320F24E320026A365 /* ReactNativeConstants.swift */; };
 		8B6D4E5620F257EF0026A365 /* ReactNativeScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6D4E5520F257EF0026A365 /* ReactNativeScreenManager.swift */; };
 		8BB3C99120DF4D190079561A /* HTReactNativeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB3C99020DF4D190079561A /* HTReactNativeEvent.m */; };
+		8BD954F721095549005DB659 /* screens.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BD954F621095548005DB659 /* screens.json */; };
 		8BE2499220D744A80014CBCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2499120D744A80014CBCF /* AppDelegate.swift */; };
 		8BE2499420D744A80014CBCF /* ReactNativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE2499320D744A80014CBCF /* ReactNativeViewController.swift */; };
 		8BE2499920D744AA0014CBCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BE2499820D744AA0014CBCF /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		8B80CC94256EE8CCD193EF1B /* Pods-BrownFieldExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrownFieldExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-BrownFieldExample/Pods-BrownFieldExample.release.xcconfig"; sourceTree = "<group>"; };
 		8BB3C99020DF4D190079561A /* HTReactNativeEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTReactNativeEvent.m; sourceTree = "<group>"; };
 		8BB3C99220DF4D2C0079561A /* HTReactNativeEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTReactNativeEvent.h; sourceTree = "<group>"; };
+		8BD954F621095548005DB659 /* screens.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = screens.json; sourceTree = "<group>"; };
 		8BE2498E20D744A80014CBCF /* BrownFieldExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrownFieldExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE2499120D744A80014CBCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BE2499320D744A80014CBCF /* ReactNativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactNativeViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		8BE2499020D744A80014CBCF /* BrownFieldExample */ = {
 			isa = PBXGroup;
 			children = (
+				8BD954F621095548005DB659 /* screens.json */,
 				8B469DA720EAA24500E0E255 /* main.jsbundle */,
 				8B5F114820DF266200423CBD /* Supporting Files */,
 				8BE2499120D744A80014CBCF /* AppDelegate.swift */,
@@ -181,6 +184,7 @@
 				8B469DA820EAA24600E0E255 /* main.jsbundle in Resources */,
 				8BE2499C20D744AA0014CBCF /* LaunchScreen.storyboard in Resources */,
 				8BE2499920D744AA0014CBCF /* Assets.xcassets in Resources */,
+				8BD954F721095549005DB659 /* screens.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
