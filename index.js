@@ -3,7 +3,7 @@ import React from 'react';
 
 import EventBridge from 'react-native-event-bridge';
 
-import { getScreen, AppEvents, ScreenList } from './src/const';
+import { getScreen, AppEvents } from './src/const';
 
 import { AppRegistry } from 'react-native';
 
@@ -27,21 +27,12 @@ class EntryPoint extends React.Component {
         );
       }
     );
-    const { getScreens } = this.props;
-
-    if (getScreens) {
-      this.sendListOfScreens();
-    }
-
   }
+
   componentWillUnmount() {
     if (this._eventSubscription) {
       this._eventSubscription.remove();
     }
-  }
-
-  sendListOfScreens = () => {
-    EventBridge.emitEvent(this, AppEvents.ListScreens, ScreenList());
   }
 
   render() {

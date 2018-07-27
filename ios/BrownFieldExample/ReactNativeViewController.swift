@@ -33,31 +33,8 @@ class ReactNativeViewController: HTReactNativeHostController {
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self?.present(alert, animated: true, completion: nil)
         }));
+    }
 
-        self.add(HTReactNativeEvent(name: RNEvents.ListScreens, handler: { info in
-            guard let screens = info?[RNProperties.screens] as? [[String: Any]] else { return }
-            ReactNativeScreenManager.sharedInstance.reset()
-            for screen in screens {
-                guard let name = screen["name"] as? String,
-                    let properties = screen["properties"] as? Dictionary<AnyHashable,Any> else {
-                    continue
-                }
-                print("Screen name is ", name)
-                print("Screen properties is ", properties)
-                ReactNativeScreenManager.sharedInstance.addScreen(screen: name, properties:properties)
-            }
-        }));
-    }
-    
-    override class func applicationDidLaunch() {
-        super.applicationDidLaunch()
-        var properties : Dictionary = Dictionary<AnyHashable,Any>()
-        properties[RNProperties.screen] = RNScreens.Query
-        properties[RNProperties.getScreens] = true
-        ReactNativeViewController.queryController = ReactNativeViewController(module: RNProperties.moduleName, properties: properties)
-        ReactNativeViewController.queryController?.loadView()
-    }
-    
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) not implemented") }
 }
 
