@@ -11,6 +11,7 @@
 #endif
 
 #import "BVLinearGradient.h"
+#import "BVLinearGradientLayer.h"
 #import "BVLinearGradientManager.h"
 
 FOUNDATION_EXPORT double BVLinearGradientVersionNumber;

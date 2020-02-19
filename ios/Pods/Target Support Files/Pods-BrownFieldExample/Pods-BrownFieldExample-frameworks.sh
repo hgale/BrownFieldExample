@@ -3,10 +3,15 @@ set -e
 set -u
 set -o pipefail
 
+function on_error {
+  echo "$(realpath -mq "${0}"):$1: error: Unexpected failure"
+}
+trap 'on_error $LINENO' ERR
+
 if [ -z ${FRAMEWORKS_FOLDER_PATH+x} ]; then
-    # If FRAMEWORKS_FOLDER_PATH is not set, then there's nowhere for us to copy
-    # frameworks to, so exit 0 (signalling the script phase was successful).
-    exit 0
+  # If FRAMEWORKS_FOLDER_PATH is not set, then there's nowhere for us to copy
+  # frameworks to, so exit 0 (signalling the script phase was successful).
+  exit 0
 fi
 
 echo "mkdir -p ${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
@@ -36,8 +41,8 @@ install_framework()
   local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
-      echo "Symlinked..."
-      source="$(readlink "${source}")"
+    echo "Symlinked..."
+    source="$(readlink "${source}")"
   fi
 
   # Use filter instead of exclude so missing patterns don't throw errors.
@@ -47,8 +52,13 @@ install_framework()
   local basename
   basename="$(basename -s .framework "$1")"
   binary="${destination}/${basename}.framework/${basename}"
+
   if ! [ -r "$binary" ]; then
     binary="${destination}/${basename}"
+  elif [ -L "${binary}" ]; then
+    echo "Destination binary is symlinked..."
+    dirname="$(dirname "${binary}")"
+    binary="${dirname}/$(readlink "${binary}")"
   fi
 
   # Strip invalid architectures so "fat" simulator / device frameworks work on device
@@ -62,7 +72,7 @@ install_framework()
   # Embed linked Swift runtime libraries. No longer necessary as of Xcode 7.
   if [ "${XCODE_VERSION_MAJOR}" -lt 7 ]; then
     local swift_runtime_libs
-    swift_runtime_libs=$(xcrun otool -LX "$binary" | grep --color=never @rpath/libswift | sed -E s/@rpath\\/\(.+dylib\).*/\\1/g | uniq -u  && exit ${PIPESTATUS[0]})
+    swift_runtime_libs=$(xcrun otool -LX "$binary" | grep --color=never @rpath/libswift | sed -E s/@rpath\\/\(.+dylib\).*/\\1/g | uniq -u)
     for lib in $swift_runtime_libs; do
       echo "rsync -auv \"${SWIFT_STDLIB_PATH}/${lib}\" \"${destination}\""
       rsync -auv "${SWIFT_STDLIB_PATH}/${lib}" "${destination}"
@@ -84,7 +94,7 @@ install_dsym() {
     binary="${DERIVED_FILES_DIR}/${basename}.framework.dSYM/Contents/Resources/DWARF/${basename}"
 
     # Strip invalid architectures so "fat" simulator / device frameworks work on device
-    if [[ "$(file "$binary")" == *"Mach-O dSYM companion"* ]]; then
+    if [[ "$(file "$binary")" == *"Mach-O "*"dSYM companion"* ]]; then
       strip_invalid_archs "$binary"
     fi
 
@@ -99,10 +109,18 @@ install_dsym() {
   fi
 }
 
+# Copies the bcsymbolmap files of a vendored framework
+install_bcsymbolmap() {
+    local bcsymbolmap_path="$1"
+    local destination="${BUILT_PRODUCTS_DIR}"
+    echo "rsync --delete -av "${RSYNC_PROTECT_TMP_FILES[@]}" --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "${bcsymbolmap_path}" "${destination}""
+    rsync --delete -av "${RSYNC_PROTECT_TMP_FILES[@]}" --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "${bcsymbolmap_path}" "${destination}"
+}
+
 # Signs a framework with the provided identity
 code_sign_if_enabled() {
-  if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED:-}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
-    # Use the current code_sign_identitiy
+  if [ -n "${EXPANDED_CODE_SIGN_IDENTITY:-}" -a "${CODE_SIGNING_REQUIRED:-}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
+    # Use the current code_sign_identity
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
     local code_sign_cmd="/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS:-} --preserve-metadata=identifier,entitlements '$1'"
 
@@ -131,7 +149,7 @@ strip_invalid_archs() {
   for arch in $binary_archs; do
     if ! [[ "${ARCHS}" == *"$arch"* ]]; then
       # Strip non-valid architectures in-place
-      lipo -remove "$arch" -output "$binary" "$binary" || exit 1
+      lipo -remove "$arch" -output "$binary" "$binary"
       stripped="$stripped $arch"
     fi
   done
@@ -145,20 +163,54 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BVLinearGradient/BVLinearGradient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FBReactNativeSpec/FBReactNativeSpec.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Folly/folly.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MSREventBridge/MSREventBridge.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/React/React.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-Core/React.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTActionSheet/RCTActionSheet.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/glog/glog.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/yoga/yoga.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BVLinearGradient/BVLinearGradient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FBReactNativeSpec/FBReactNativeSpec.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Folly/folly.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MSREventBridge/MSREventBridge.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/React/React.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-Core/React.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTActionSheet/RCTActionSheet.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/glog/glog.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/yoga/yoga.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
